@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<script src="main.js" charset="utf-8"></script>
+<meta name="viewport" content="width=device-width, initial-scale=0.55">
+<head>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<audio id="background-music" loop="true" src="Sounds/1_MainMusic.mp3"></audio>
+
+<div class="WholeGameContainer">
+
+<div id="overlay" class="overlay">
+  <div id="startGameSplash" class="startGame">
+    <div class="" style="width: 40%">
+      <p style="color: white;font-size:1.5vw">
+        This is a strictly 18+ NSFW game. </br>
+      </p>
+      <p style="color: white;font-size:1vw">
+        This game features a variety of fetish content that is not suitable for those under the age of 18. </br>
+        If you are under the age of 18, click away immediately.
+       </p>
+      <input type="checkbox" id="18plus" name="18plus" onchange="document.getElementById('startGameButton').disabled = !this.checked; document.getElementById('startGameButton').classList.toggle('disabledButton');">
+      <label style="color: white" for="18plus">I am at least 18 years old</label>
+    </div>
+    <br>
+    <button disabled id="startGameButton" class="startGameButton disabledButton" type="submit" onclick="startGameFunction()">Start Game ></button>
+  </div>
+</div>
+
+<div id="resetGameConfirmation" class="invisible" style="z-index: 20">
+  <div class="resetGameConfirmationBox">
+    <span style="color: white; font-size: 25px;">Are you sure you want to reset the game? You will lose all your progress and achievements.</span>
+    <br>
+    <br>
+    <div class="centering">
+      <button id="performReset" class="startGameButton" type="submit" onclick="performReset()">Yes, Reset</button>
+      <button id="cancelReset" class="startGameButton" type="submit" onclick="cancelReset()">No, Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="mainUIId" class="invisible">
+  <div id="menusOverlay" class="MenusOverlay">
+    <div style="display: block; width: 170px;">
+      <span style="display: block; padding-bottom: 5px; display: block; font-size:28px;cursor:pointer; color: white; height: 40px; white-space: nowrap" onclick="openGirlMenu()">&#9776; Girls</span>
+      <span id="menuOptionUpgrade" style="display: block; padding-bottom: 5px; display: block; font-size:28px;cursor:pointer; color: white; height: 40px; white-space: nowrap" onclick="openUpgradeMenu()">&#9776; Upgrades</span>
+      <span id="menuOptionGift"  style="display: block; padding-bottom: 5px; display: block; font-size:28px;cursor:pointer; color: white; height: 40px; white-space: nowrap" onclick="openGiftMenu()">&#9776; Gift Shop</span>
+      <span id="menuOptionDate" style="display: block; padding-bottom: 5px; display: block; font-size:28px;cursor:pointer; color: white; height: 40px; white-space: nowrap" onclick="openDateMenu()">&#9776; Date Spots</span>
+      <span id="menuOptionS" style="display: block; padding-bottom: 5px; display: block; font-size:28px;cursor:pointer; color: white; height: 40px; white-space: nowrap" onclick="openSMenu()">&#9776; Special</span>
+      <span id="menuOptionProfile" style="display: block; padding-bottom: 5px; display: block; font-size:28px;cursor:pointer; color: white; height: 40px; white-space: nowrap" onclick="toggleProfile()">&#9776; Profile</span>
+      <span id="menuOptionMemories" style="display: block; padding-bottom: 5px; display: block; font-size:28px;cursor:pointer; color: white; height: 40px; white-space: nowrap" onclick="openMemories()">&#9776; Memory Log</span>
+      <span id="menuOptionDateCGs" style="display: block; padding-bottom: 5px; display: block; font-size:28px;cursor:pointer; color: white; height: 40px; white-space: nowrap" onclick="openDateCGs()">&#9776; Date CGs</span>
+      <span id="menuOptionAchievement" style="display: block; padding-bottom: 5px; display: block; font-size:28px;cursor:pointer; color: white; height: 40px; white-space: nowrap" onclick="openAchievements()">&#9776; Achievements</span>
+      <div id="keyHelperText" class="helpCommands">
+        <br>
+        <br>
+        <span id="MusicToggle" style="display: block">F2: Toggle Music - Music is Off</span>
+        <span style="display: block">F4: Hide Help</span>
+        <span style="display: block">Del: Reset Game</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="GameDisplayContainer column">
+    <div id="counterContainerHeader" class="counterContainer">
+      <div id="leftHeader" class="leftHeader">
+        <div class="moneyCounterBackground">
+          <div class="dollarImg">
+            <img src="Icons/Dollar.png">
+          </div>
+          <div id="counter" >
+            0
+          </div>
+        </div>
+        <div class="expansionStageBackground">
+          <div class="expansionImg">
+            <img id="ExpansionImage" src="Icons/Breast.png">
+          </div>
+          <div id="expansionStage">
+            0
+          </div>
+        </div>
+        <div class="heartStageBackground">
+          <div class="heartImg">
+            <img src="Icons/HeartLevel.png">
+            <div id="affectionStage" class="heartLevel">10</div>
+          </div>
+          <div id="affectionProgress" class="percentage">
+            0
+          </div>
+        </div>
+      </div>
+      <div class="rightHeader">
+        <div id="AffectionUpContainer" class="affectionUpBackground">
+          <span id="affectionMessage" style="font-size: 18px; margin-left: 1em">
+            Affection Up!
+          </span>
+          <button id="affectionUpButton" class="affectionUpButton" type="submit" onclick="affectionUpGirl()"></button>
+        </div>
+        <div id="LevelUpContainer" class="levelUpBackground">
+          <div id="levelUpPrice">
+            1000
+          </div>
+          <button disabled id="upgradeExpansionButton" class="levelUpButton" type="submit" onclick="levelUpGirl()"></button>
+        </div>
+      </div>
+    </div>
+    <div id="emptyClickArea" class="EmptyClickArea">
+    </div>
+    <div id="whiteClickArea" class="WhiteClickArea invisible">
+    </div>
+    <div id="ClickArea" class="GameClickArea">
+      <video class="ClickVideo" id="click-video-1" preload="auto" autoplay loop muted disablePictureInPicture>
+        <source id="background-video-src" src="" type="video/mp4">
+      </video>
+      <video class="ClickVideo invisible" id="click-video-2" preload="auto" autoplay loop muted disablePictureInPicture>
+        <source id="background-video-src" src="" type="video/mp4">
+      </video>
+      <video class="ClickVideo invisible" id="gift-video-neutral" preload="auto" muted disablePictureInPicture>
+        <source id="gift-video-src-neutral" src="" type="video/mp4">
+      </video>
+      <video class="ClickVideo invisible" id="gift-video-love" preload="auto" muted disablePictureInPicture>
+        <source id="gift-video-src-love" src="" type="video/mp4">
+      </video>
+      <video class="ClickVideo invisible" id="gift-video-hate" preload="auto" muted disablePictureInPicture>
+        <source id="gift-video-src-hate" src="" type="video/mp4">
+      </video>
+      <div class="speechBubble" id="dialogueSpeechBubbleContainer">
+        <span class="speechBubbleText" id="dialogueSpeechBubbleText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem</span>
+      </div>
+      <div class="speechBubble" id="giftSpeechBubbleContainer">
+        <span class="speechBubbleText" id="giftSpeechBubbleText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem</span>
+      </div>
+    </div>
+
+    <div id="profileArea" class="ProfileArea invisible">
+      <div id="profileCardArea" class="ProfileCardArea">
+        <a href="javascript:void(0)" class="closeProfileButton" onclick="toggleProfile()">&times;</a>
+        <div class="ProfileWhiteBackStyleOverlay"></div>
+        <div class="profileBustContainer">
+          <img id="profileBustImg" src="" alt="">
+        </div>
+        <div class="profileTextContainer">
+          <div class="profileText">
+            <div class="profileGirlIntro">
+              <div id="profileGirlName" class="profileGirlName">
+                Blair
+              </div>
+              <div id="profileGirlDescription" class="profileGirlDescription">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+              </div>
+            </div>
+            <div class="profileDividerBar"></div>
+            <div class="profileGirlMetadata">
+              <div class="itemColumn">
+                <div class="profileRow">
+                  <span>
+                    <b>Growth Type:</b>
+                    <span id="profileGrowthType">Breast</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Age:</b>
+                    <span id="profileAge">0</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Height:</b>
+                    <span id="profileHeight">persona</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Breasts:</b>
+                    <span id="profileBreast">persona</span>
+                  </span>
+                </div>
+                <div id="profileAdditional1Container" class="profileRow">
+                  <span>
+                    <b id="profileAdditional1">Growth Size:</b>
+                    <span id="profileAdditional1Size">Cup</span>
+                  </span>
+                </div>
+                <div id="profileAdditional2Container" class="profileRow">
+                  <span>
+                    <b id="profileAdditional2">Growth Size:</b>
+                    <span id="profileAdditional2Size">Cup</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Birthday:</b>
+                    <span id="profileBirthday">0</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Personality:</b>
+                    <span id="profilePersonality">persona</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Likes:</b>
+                    <span id="profileLikes">pen15</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Dislikes:</b>
+                    <span id="profileDislikes">pen15</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Favorite Gift:</b>
+                    <span id="profileFavoriteGift">flower</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Disliked Gift:</b>
+                    <span id="profileHatedGift">pen15</span>
+                  </span>
+                </div>
+                <!--<div class="profileMetadataDivider"></div> -->
+              </div>
+              <div class="itemColumn">
+                <div class="profileRow">
+                  <span>
+                    <b>Auto Clicker Count:</b>
+                    <span id="profileAutoCount">0</span>
+                </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Affection Progress:</b>
+                    <span id="profileAffectionProgress">0</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Affection Needed:</b>
+                    <span id="profileAffectionNeeded">0</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Favorite Gifts Received:</b>
+                    <span id="profileFaveGiftCount">0</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b>Disliked Gift Received:</b>
+                    <span id="profileDislikedGiftCount">0</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b id="profileLineDate1">Coffee Dates:</b>
+                    <span id="profileDate1">0</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b id="profileLineDate2">Coffee Dates:</b>
+                    <span id="profileDate2">0</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b id="profileLineDate3">Coffee Dates:</b>
+                    <span id="profileDate3">0</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b id="profileLineDate4">Coffee Dates:</b>
+                    <span id="profileDate4">0</span>
+                  </span>
+                </div>
+                <div class="profileRow">
+                  <span>
+                    <b id="profileLineDate5">Coffee Dates:</b>
+                    <span id="profileDate5">0</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div id="achievementPopup" class="newAchievementPopup" style="overflow: hidden;">
+      <div class="itemRow">
+        <img style="max-width:2.625em; max-height:2.625em; margin-top: -0.3em" src="Icons/Achievement.png"></img>
+        <span class="instructions" style="margin-left: 3.5em; margin-top: 1.1em; font-size: 13px"> Achievement Unlocked! </span>
+        <span id="achievementPopupAName" class="instructions" style="width: 100%; margin-left: 2em; margin-top: 1.3em; font-size: 22px"> Achievement</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="dateOverlay" class="overlay dateOverlay invisible">
+    <div class="dateContainer">
+      <img style="width: 100%" id="dateImage" src="" alt="">
+      <div id="dateTextOverlayContainer" class="overlay dateTextOverlay">
+        <div id="withinDateText" class="withinDateText">
+          Apple bees
+        </div>
+      </div>
+      <div id="dateChangeButtons">
+        <button class="button dateAnswerChoiceA invisible" title="0" type="button" id="dateResponse_0" onclick="DateAnswerToResponse(this.title)">answer a</button>
+        <button class="button dateAnswerChoiceB invisible" title="1" type="button" id="dateResponse_1" onclick="DateAnswerToResponse(this.title)">answer b</button>
+        <button class="button dateAnswerChoiceC invisible" title="2" type="button" id="dateResponse_2" onclick="DateAnswerToResponse(this.title)">answer c</button>
+        <button class="button withinDateButton" title="" type="button" id="dateButtonToQuestions" onclick="DateToQuestions()">Next</button>
+        <button class="button withinDateButton invisible" title="" type="button" id="dateButtonToClosing" onclick="DateToClosing()">Next</button>
+        <button class="button withinDateButton invisible" title="" type="button" id="dateButtonFinish" onclick="DateFinish()">Finish</button>
+      </div>
+      <button class="withinDateButtonTextVisible" title="" type="button" id="datetHideTextButton" onclick="ToggleDateText()"></button>
+    </div>
+  </div>
+
+  <div id="eventOverlay" class="overlay dateOverlay invisible">
+    <div class="dateContainer">
+      <img style="width: 100%" id="eventImage" src="" alt="">
+      <div id="withinEventOverlayContainer" class="overlay dateTextOverlay">
+        <div id="withinEventText" class="withinDateText">
+          Apple bees
+        </div>
+      </div>
+      <div id="eventChangeButtons">
+        <button class="button withinDateButtonPrev invisible" title="" type="button" id="eventPrevButton" onclick="EventPrevPanel()">Previous</button>
+        <button class="button withinDateButton" title="" type="button" id="eventNextButton" onclick="EventNextPanel()">Next</button>
+        <button class="button withinDateButton invisible" title="" type="button" id="eventFinishButton" onclick="EventClose()">Finish</button>
+      </div>
+      <button class="withinDateButtonTextVisible" title="" type="button" id="eventHideTextButton" onclick="ToggleEventText()"></button>
+    </div>
+  </div>
+
+  <div id="cgMenuOverlay" class="overlay dateOverlay invisible">
+    <div  id="cgContents" class="cgContentContainer invisible">
+      <img style="width: 100%" id="cgContentsImage" src="" alt="">
+      <button class="button withinDateButtonPrev" title="" type="button" id="eventPrevButton" onclick="CGPrevious()">Previous</button>
+      <button class="button withinDateButton" title="" type="button" id="eventNextButton" onclick="CGNext()">Next</button>
+      <button class="button sCloseButton" title="" type="button" id="eventFinishButton" onclick="CGFinish()">Finish</button>
+    </div>
+    <div id="cgMenu" class="cgContainer ">
+      <button class="closeCGMenuButton" onclick="closeCGMenu()">&times;</button>
+      <div id="cgMenuButtons" class="cgMenuRow">
+      </div>
+    </div>
+  </div>
+
+  <div id="sOverlay" class="overlay sOverlay invisible">
+    <div class="sContainer">
+      <video class="ClickVideo invisible" id="s-videoA" preload="auto" autoplay loop muted disablePictureInPicture>
+        <source id="s-video-src" src="Animations/Blair/S/S1/0.mp4" type="video/mp4">
+      </video>
+      <video class="ClickVideo invisible" id="s-videoB" preload="auto" autoplay loop muted disablePictureInPicture>
+        <source id="s-video-src" src="Animations/Blair/S/S1/0.mp4" type="video/mp4">
+      </video>
+      <video class="ClickVideo" id="s-videoC" preload="auto" autoplay loop muted disablePictureInPicture>
+        <source id="s-video-src" src="Animations/Blair/S/S1/0.mp4" type="video/mp4">
+      </video>
+      <button class="button sNextButton" title="" type="button" id="nextSButton" onclick="nextSVid()">Next</button>
+      <button class="button sPreviousButton" title="" type="button" id="previousSButton" onclick="prevSVid()">Previous</button>
+      <button class="button sCloseButton" title="" type="button" id="closeSButton" onclick="closeS()">End</button>
+    </div>
+  </div>
+
+  <div id="sideUpgradeMenu" class="sidenav">
+    <div class="menuPadder">
+      <span class="instructions"> Upgrade clicking </span>
+      <a href="javascript:void(0)" class="closebtn" onclick="closeUpgradeMenu()">&times;</a>
+      <div class="ButtonTopPadder">
+        <div class="itemColumn">
+          <div class="itemRow">
+            <div class="upgradeImg">
+              <img src="Icons/ClickCount.png">
+            </div>
+            <div class="upgradeText">
+              <span class="upgradeTitle" style="font-size: 19px">Auto Clickers</span>
+              <span id="AutoClickerCountDesc" class="">Desc</span>
+            </div>
+            <button class="button upgrade" title="" type="button" id="UpgradeAutoCount" onclick="UpgradeAutoClickerCountFunction()">
+              <span id="upgradePriceAutoCount" class="upgradePrice enMoney">Desc</span>
+            </button>
+          </div>
+          <div class="itemRow" style="margin: 0px;">
+            <span>*Number of auto clickers is separate for each girl</span>
+          </div>
+          <div class="itemRow" style="margin: 0px;">
+            --------------------------------------------
+          </div>
+          <div class="itemRow">
+            <div class="upgradeImg">
+              <img src="Icons/ClickPower.png">
+            </div>
+            <div class="upgradeText">
+              <span class="upgradeTitle">Click Power</span>
+              <span id="ClickPowerDec" class="">Desc</span>
+            </div>
+            <button class="button upgrade" title="" type="button" id="UpgradeClickPower" onclick="UpgradeClickPowerFunction()">
+              <span id="upgradePriceClickPower" class="upgradePrice enMoney">Desc</span>
+            </button>
+          </div>
+          <div class="itemRow">
+            <div class="upgradeImg">
+              <img src="Icons/AutoClickPower.png">
+            </div>
+            <div class="upgradeText">
+              <span class="upgradeTitle">Auto Power</span>
+              <span id="AutoClickPowerDec" class="">Desc</span>
+            </div>
+            <button class="button upgrade" title="" type="button" id="UpgradeAutoClickPower" onclick="UpgradeAutoClickPowerFunction()">
+              <span id="upgradePriceAutoPower" class="upgradePrice enMoney">Desc</span>
+            </button>
+          </div>
+          <div class="itemRow">
+            <div class="upgradeImg">
+              <img src="Icons/AutoInterval.png">
+            </div>
+            <div class="upgradeText">
+              <span class="upgradeTitle">Auto Speed</span>
+              <span id="AutoIntervalDesc" class="">Desc</span>
+            </div>
+            <button class="button upgrade" title="" type="button" id="UpgradeAutoInterval" onclick="UpgradeAutoIntervalFunction()">
+              <span id="upgradePriceSpeed" class="upgradePrice enMoney">Desc</span>
+            </button>
+          </div>
+          <div class="itemRow" style="margin: 0px;">
+            <span>*These upgrades are shared across all girls</span>
+          </div>
+          <div class="itemRow" style="margin: 0px;">
+            --------------------------------------------
+          </div>
+          <div class="itemRow">
+            <div class="itemColumn multiplierInfo">
+              <span style="display: none" class="invisible">Growth Stage:</span>
+              <span style="display: none" class="invisible">Affection Stage:</span>
+              <span class="tooltip">
+                <span class="dottedBottom">Base Multiplier:</span>
+                <span class="tooltiptext">Each girl has a different inherent <b>Base Multiplier</b>. This value is constant for each girl and does not change with affection.</span>
+              </span>
+              <span class="tooltip">
+                <span class="dottedBottom">Affection Bonus:</span>
+                <span class="tooltiptext">The <b>Affection Bonus</b> is the calculated as the affection stage of the current girl plus 1. Increase affection to increase this bonus!</span>
+              </span>
+              <br>
+              <span class="tooltip">
+                <span class="dottedBottom"><b>Total Multiplier:</b></span>
+                <span class="tooltiptext">The Base is multiplied by the Affection Bonus to give the <b>Total Multiplier</b>. Click and Autoclick power for this girl is multiplied by this total.</span>
+              </span>
+            </div>
+            <div class="itemColumn multiplierValues">
+              <span style="display: none" class="invisible growthMultiplierText" id="growthMultiplierText">+1</span>
+              <span style="display: none" class="invisible affectionMultiplierText" id="affectionMultiplierText">+0</span>
+              <span style="display: none" class="invisible">---</span>
+              <span class="baseMultiplierText" id="baseMultiplierText">x1</span>
+              <span class="bonusMultiplierText" id="bonusMultiplierText">&nbsp;&nbsp;1</span>
+              <span>---</span>
+              <span class="totalMultiplierText" id="totalMultiplierText">x1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="sideGirlMenu" class="sidenav">
+    <span class="instructions"> Pick a girl! </span>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeGirlMenu()">&times;</a>
+    <div class="giftMenuPadder">
+      <!-- <div class="itemRow" style="margin-bottom: 0em">
+        <button disabled class="collectAllButton" title="" type="button" id="colelctAll" onclick="CollectAll()">Collect All Cash</button>
+      </div> -->
+      <div class="itemRow" style="margin-bottom: 0em">
+        <button class="girlSwapButton" title="" type="button" id="Blair" onclick="loadGirl(this.id)" onmouseover="showGirlBonusInfo(this.id)" onmouseout="hideGirlBonusInfo(this.id)"></button>
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em">
+        <button class="girlSwapButton" title="" type="button" id="Jennifer" onclick="loadGirl(this.id)" onmouseover="showGirlBonusInfo(this.id)" onmouseout="hideGirlBonusInfo(this.id)"></button>
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em">
+        <button class="girlSwapButton" title="" type="button" id="Henriette" onclick="loadGirl(this.id)" onmouseover="showGirlBonusInfo(this.id)" onmouseout="hideGirlBonusInfo(this.id)"></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="girlBonusInfo" class="sidenavItemDescription" style="height: 275px">
+    <div class="descriptionTop" style="padding-bottom: 0em">
+      <div style="width:30%">
+        <img id="girlBonusInfoIcon" style="width: 100%;height: 100%;" class="descriptionImg" src=""></img>
+      </div>
+      <div style="width:72%; padding-left: 2.1em; position: absolute; top: 10;" class="descriptionTitle" id="girlBonusInfoTitle">Blair</div>
+    </div>
+    <div id="girlBonusInfoDescription" style="padding: 0.5em; white-space: pre-wrap;">
+      Description
+    </div>
+  </div>
+
+  <div id="sideGiftMenu" class="sidenav">
+    <span class="instructions"> Give gifts to raise affection! </span>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeGiftMenu()">&times;</a>
+    <div class="giftMenuPadder">
+      <div class="itemRow" style="margin-bottom: 0em">
+        <div class="itemColumn">
+          <button class="giftButton" title="" type="button" id="Gift1" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Flowers.png">
+              <div class="giftTextSmaller" >Flowers</div>
+              <div class="giftText" >$10</div>
+            </div>
+          </button>
+          <button disabled class="giftButton" title="" type="button" id="Gift3" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Plushie.png">
+              <div class="giftTextSmaller" >Plushie</div>
+              <div class="giftText" >$500</div>
+            </div>
+          </button>
+          <button class="giftButton" title="" type="button" id="Gift5" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Bra.png">
+              <div class="giftTextSmaller" >Bra</div>
+              <div class="giftText" >$500k</div>
+            </div>
+          </button>
+          <button class="giftButton" title="" type="button" id="Gift7" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Handbag.png">
+              <div class="giftTextSmaller" >Handbag</div>
+              <div class="giftText" >$500M</div>
+            </div>
+          </button>
+          <button class="giftButton" title="" type="button" id="Gift9" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Painting.png">
+              <div class="giftTextSmaller" >Painting</div>
+              <div class="giftText" >$500G</div>
+            </div>
+          </button>
+          <button class="giftButton" title="" type="button" id="Gift11" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Necklace.png">
+              <div class="giftTextSmaller" >Necklace</div>
+              <div class="giftText" >$500T</div>
+            </div>
+          </button>
+        </div>
+        <div class="itemColumn">
+          <button class="giftButton" title="" type="button" id="Gift2" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Chocolates.png">
+              <div class="giftTextSmaller" >Chocolates</div>
+              <div class="giftText" >$100</div>
+            </div>
+          </button>
+          <button class="giftButton" title="" type="button" id="Gift4" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Book.png">
+              <div class="giftTextSmaller" >Book</div>
+              <div class="giftText" >$1.0k</div>
+            </div>
+          </button>
+          <button class="giftButton" title="" type="button" id="Gift6" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Perfume.png">
+              <div class="giftTextSmaller" >Perfume</div>
+              <div class="giftText" >$1.0M</div>
+            </div>
+          </button>
+          <button class="giftButton" title="" type="button" id="Gift8" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Phone.png">
+              <div class="giftTextSmaller" >Phone</div>
+              <div class="giftText" >$1.0G</div>
+            </div>
+          </button>
+          <button class="giftButton" title="" type="button" id="Gift10" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Lingerie.png">
+              <div class="giftTextSmaller" >Lingerie</div>
+              <div class="giftText" >$1.0T</div>
+            </div>
+          </button>
+          <button class="giftButton" title="" type="button" id="Gift12" onclick="giveGift(this.id)">
+            <div class="giftImg">
+              <img src="Icons/Ring.png">
+              <div class="giftTextSmaller" >Ring</div>
+              <div class="giftText" >$1.0P</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="sideDateMenu" class="sidenav">
+    <span class="instructions"> Date to raise affection! </span>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeDateMenu()">&times;</a>
+    <div class="giftMenuPadder">
+      <div id="DateMenuHider" class="overlayDisableMenu">
+        Under Construction
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em">
+        <button class="dateButton date1" title="" type="button" id="Date1" onclick="goOnDate(this.id)">
+          <div class="dateTextContainer">
+            <div class="dateText" id="Date1Name" >Cafe</div>
+            <div class="dateText" id="Date1Req" >$20 + 0♥</div>
+          </div>
+        </button>
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em; margin-top: 0.25em">
+        <button class="dateButton date2" title="" type="button" id="Date2" onclick="goOnDate(this.id)">
+          <div class="dateTextContainer">
+            <div class="dateText" id="Date2Name" >Shopping</div>
+            <div class="dateText" id="Date2Req" >$200 + 1♥</div>
+          </div>
+        </button>
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em; margin-top: 0.25em">
+        <button class="dateButton date3" title="" type="button" id="Date3" onclick="goOnDate(this.id)">
+          <div class="dateTextContainer">
+            <div class="dateText" id="Date3Name" >Theme Park</div>
+            <div class="dateText" id="Date3Req" >$200.0k + 2♥</div>
+          </div>
+        </button>
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em; margin-top: 0.25em">
+        <button class="dateButton date4" title="" type="button" id="Date4" onclick="goOnDate(this.id)">
+          <div class="dateTextContainer">
+            <div class="dateText" id="Date4Name" >Beach</div>
+            <div class="dateText" id="Date4Req" >$200.0M + 3♥</div>
+          </div>
+        </button>
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em; margin-top: 0.25em">
+        <button class="dateButton date5" title="" type="button" id="Date5" onclick="goOnDate(this.id)">
+          <div class="dateTextContainer">
+            <div class="dateText" id="Date5Name" >Fancy Dinner</div>
+            <div class="dateText" id="Date5Req" >$200.0B + 4♥</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="sideSMenu" class="sidenav">
+    <span class="instructions"> Get Intimate~ </span>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeSMenu()">&times;</a>
+    <div class="giftMenuPadder">
+      <div id="SMenuHider" class="overlayDisableMenu">
+        Under Construction
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em">
+        <button class="sButton" title="" type="button" id="S1" onclick="haveS(this.id)">
+          <img id="S1ButtonImage" class="sButtonImage" src="" alt="">
+          <div class="sTextContainer">
+            <div id="S1Text" class="sText" >0♥</div>
+          </div>
+        </button>
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em; margin-top: 0.25em">
+        <button class="sButton" title="" type="button" id="S2" onclick="haveS(this.id)">
+          <img id="S2ButtonImage" class="sButtonImage" src="" alt="">
+          <div class="sTextContainer">
+            <div id="S2Text" class="sText" >0♥</div>
+          </div>
+        </button>
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em; margin-top: 0.25em">
+        <button class="sButton" title="" type="button" id="S3" onclick="haveS(this.id)">
+          <img id="S3ButtonImage" class="sButtonImage" src="" alt="">
+          <div class="sTextContainer">
+            <div id="S3Text" class="sText" >0♥</div>
+          </div>
+        </button>
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em; margin-top: 0.25em">
+        <button class="sButton" title="" type="button" id="S4" onclick="haveS(this.id)">
+          <img id="S4ButtonImage" class="sButtonImage" src="" alt="">
+          <div class="sTextContainer">
+            <div id="S4Text" class="sText" >0♥</div>
+          </div>
+        </button>
+      </div>
+      <div class="itemRow" style="margin-bottom: 0em; margin-top: 0.25em">
+        <button class="sButton" title="" type="button" id="S5" onclick="haveS(this.id)">
+          <img id="S5ButtonImage" class="sButtonImage" src="" alt="">
+          <div class="sTextContainer">
+            <div id="S5Text" class="sText" >0♥</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="memoriesMenu" class="sidenav" style="width:0px">
+    <span class="instructions"> Recall past events </span>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeMemories()">&times;</a>
+    <div class="giftMenuPadder">
+      <div class="itemRow">
+        <div class="itemColumn" style="margin-left: -0.4em; margin-top: 0.5em" id="memoriesListContainer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="achievementMenu" class="sidenav" style="width:0px">
+    <span class="instructions" style="font-size: 16px" id="numAchievementsEarnedId"> 0/23 Achievement(s) earned </span>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeAchievements()">&times;</a>
+    <div class="giftMenuPadder">
+      <div class="itemRow">
+        <div class="itemColumn" style="margin-left: -0.4em; margin-top: -0.5em" id="achievementListID">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="achievementBonusInfo" class="sidenavItemDescription" style="height: 275px">
+    <div class="descriptionTop" style="padding-bottom: 0em">
+      <div style="width:28%">
+        <img style="min-width:50px" class="descriptionImg" src="Icons/Achievement.png"></img>
+      </div>
+      <div style="width:72%; padding-left: 2em; position: absolute; top: 10;" class="descriptionTitle" id="achivementBonusInfoTitle">Title</div>
+    </div>
+    <div id="achivementBonusInfoDescription" style="padding: 0.5em; white-space: pre-wrap;">
+      Description
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+</body>
+</html>
