@@ -2486,10 +2486,6 @@ function createAchievements(){
   if (window.localStorage.getItem("Achievement Dictionary") == null){
     window.localStorage.setItem("Achievement Dictionary", JSON.stringify(achievementDictionary));
   }
-  else{
-    alert("Error")
-    console.log(window.localStorage.getItem("Achievement Dictionary"))
-  }
 }
 
 function createGiftDictionary() {
