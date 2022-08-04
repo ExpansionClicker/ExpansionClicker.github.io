@@ -281,6 +281,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  touch-action: manipulation;
 
   /*max-height: min(calc(100vw * 9/16), 720px); /*phone, 1440px. test, 720px*/
   /*max-width: min(100%, 1280px); /* phone, 2960px. test, 1280px*/
