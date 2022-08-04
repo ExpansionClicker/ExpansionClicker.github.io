@@ -71,421 +71,8 @@ var konamiCode = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 
 var reverseCode = ['a', 'b', 'right', 'left', 'right', 'left', 'down', 'down', 'up', 'up'];
 var konamiCodePosition = 0;
 
-// image file list
-var allImages = ["Images/MissingCG.jpg",
-"Images/Blair/AffectionEvent/1/Panel1.jpg",
-"Images/Blair/AffectionEvent/1/Panel10.jpg",
-"Images/Blair/AffectionEvent/1/Panel11.jpg",
-"Images/Blair/AffectionEvent/1/Panel12.jpg",
-"Images/Blair/AffectionEvent/1/Panel13.jpg",
-"Images/Blair/AffectionEvent/1/Panel14.jpg",
-"Images/Blair/AffectionEvent/1/Panel15.jpg",
-"Images/Blair/AffectionEvent/1/Panel16.jpg",
-"Images/Blair/AffectionEvent/1/Panel17.jpg",
-"Images/Blair/AffectionEvent/1/Panel2.jpg",
-"Images/Blair/AffectionEvent/1/Panel3.jpg",
-"Images/Blair/AffectionEvent/1/Panel4.jpg",
-"Images/Blair/AffectionEvent/1/Panel5.jpg",
-"Images/Blair/AffectionEvent/1/Panel6.jpg",
-"Images/Blair/AffectionEvent/1/Panel7.jpg",
-"Images/Blair/AffectionEvent/1/Panel8.jpg",
-"Images/Blair/AffectionEvent/1/Panel9.jpg",
-"Images/Blair/AffectionEvent/2/Panel1.jpg",
-"Images/Blair/AffectionEvent/2/Panel10.jpg",
-"Images/Blair/AffectionEvent/2/Panel11.jpg",
-"Images/Blair/AffectionEvent/2/Panel12.jpg",
-"Images/Blair/AffectionEvent/2/Panel13.jpg",
-"Images/Blair/AffectionEvent/2/Panel14.jpg",
-"Images/Blair/AffectionEvent/2/Panel2.jpg",
-"Images/Blair/AffectionEvent/2/Panel3.jpg",
-"Images/Blair/AffectionEvent/2/Panel4.jpg",
-"Images/Blair/AffectionEvent/2/Panel5.jpg",
-"Images/Blair/AffectionEvent/2/Panel6.jpg",
-"Images/Blair/AffectionEvent/2/Panel7.jpg",
-"Images/Blair/AffectionEvent/2/Panel8.jpg",
-"Images/Blair/AffectionEvent/2/Panel9.jpg",
-"Images/Blair/AffectionEvent/3/Panel1.jpg",
-"Images/Blair/AffectionEvent/3/Panel10.jpg",
-"Images/Blair/AffectionEvent/3/Panel11.jpg",
-"Images/Blair/AffectionEvent/3/Panel12.jpg",
-"Images/Blair/AffectionEvent/3/Panel2.jpg",
-"Images/Blair/AffectionEvent/3/Panel3.jpg",
-"Images/Blair/AffectionEvent/3/Panel4.jpg",
-"Images/Blair/AffectionEvent/3/Panel5.jpg",
-"Images/Blair/AffectionEvent/3/Panel6.jpg",
-"Images/Blair/AffectionEvent/3/Panel7.jpg",
-"Images/Blair/AffectionEvent/3/Panel8.jpg",
-"Images/Blair/AffectionEvent/3/Panel9.jpg",
-"Images/Blair/AffectionEvent/4/Panel1.jpg",
-"Images/Blair/AffectionEvent/4/Panel10.jpg",
-"Images/Blair/AffectionEvent/4/Panel11.jpg",
-"Images/Blair/AffectionEvent/4/Panel12.jpg",
-"Images/Blair/AffectionEvent/4/Panel13.jpg",
-"Images/Blair/AffectionEvent/4/Panel14.jpg",
-"Images/Blair/AffectionEvent/4/Panel15.jpg",
-"Images/Blair/AffectionEvent/4/Panel16.jpg",
-"Images/Blair/AffectionEvent/4/Panel17.jpg",
-"Images/Blair/AffectionEvent/4/Panel18.jpg",
-"Images/Blair/AffectionEvent/4/Panel19.jpg",
-"Images/Blair/AffectionEvent/4/Panel2.jpg",
-"Images/Blair/AffectionEvent/4/Panel20.jpg",
-"Images/Blair/AffectionEvent/4/Panel21.jpg",
-"Images/Blair/AffectionEvent/4/Panel22.jpg",
-"Images/Blair/AffectionEvent/4/Panel23.jpg",
-"Images/Blair/AffectionEvent/4/Panel24.jpg",
-"Images/Blair/AffectionEvent/4/Panel25.jpg",
-"Images/Blair/AffectionEvent/4/Panel26.jpg",
-"Images/Blair/AffectionEvent/4/Panel27.jpg",
-"Images/Blair/AffectionEvent/4/Panel3.jpg",
-"Images/Blair/AffectionEvent/4/Panel4.jpg",
-"Images/Blair/AffectionEvent/4/Panel5.jpg",
-"Images/Blair/AffectionEvent/4/Panel6.jpg",
-"Images/Blair/AffectionEvent/4/Panel7.jpg",
-"Images/Blair/AffectionEvent/4/Panel8.jpg",
-"Images/Blair/AffectionEvent/4/Panel9.jpg",
-"Images/Blair/AffectionEvent/5/Panel1.jpg",
-"Images/Blair/AffectionEvent/5/Panel10.jpg",
-"Images/Blair/AffectionEvent/5/Panel11.jpg",
-"Images/Blair/AffectionEvent/5/Panel12.jpg",
-"Images/Blair/AffectionEvent/5/Panel2.jpg",
-"Images/Blair/AffectionEvent/5/Panel3.jpg",
-"Images/Blair/AffectionEvent/5/Panel4.jpg",
-"Images/Blair/AffectionEvent/5/Panel5.jpg",
-"Images/Blair/AffectionEvent/5/Panel6.jpg",
-"Images/Blair/AffectionEvent/5/Panel7.jpg",
-"Images/Blair/AffectionEvent/5/Panel8.jpg",
-"Images/Blair/AffectionEvent/5/Panel9.jpg",
-"Images/Blair/DateBackgrounds/Date1.jpg",
-"Images/Blair/DateBackgrounds/Date2.jpg",
-"Images/Blair/DateBackgrounds/Date3.jpg",
-"Images/Blair/DateBackgrounds/Date4.jpg",
-"Images/Blair/DateBackgrounds/Date5.jpg",
-"Images/Blair/Dates/Date1/1/Base.jpg",
-"Images/Blair/Dates/Date1/1/Hate.jpg",
-"Images/Blair/Dates/Date1/1/Love.jpg",
-"Images/Blair/Dates/Date1/1/Neutral.jpg",
-"Images/Blair/Dates/Date1/2/Base.jpg",
-"Images/Blair/Dates/Date1/2/Hate.jpg",
-"Images/Blair/Dates/Date1/2/Love.jpg",
-"Images/Blair/Dates/Date1/2/Neutral.jpg",
-"Images/Blair/Dates/Date1/3/Base.jpg",
-"Images/Blair/Dates/Date1/3/Hate.jpg",
-"Images/Blair/Dates/Date1/3/Love.jpg",
-"Images/Blair/Dates/Date1/3/Neutral.jpg",
-"Images/Blair/Dates/Date1/4/Base.jpg",
-"Images/Blair/Dates/Date1/4/Hate.jpg",
-"Images/Blair/Dates/Date1/4/Love.jpg",
-"Images/Blair/Dates/Date1/4/Neutral.jpg",
-"Images/Blair/Dates/Date1/5/Base.jpg",
-"Images/Blair/Dates/Date1/5/Hate.jpg",
-"Images/Blair/Dates/Date1/5/Love.jpg",
-"Images/Blair/Dates/Date1/5/Neutral.jpg",
-"Images/Blair/Dates/Date2/2/Base.jpg",
-"Images/Blair/Dates/Date2/2/Hate.jpg",
-"Images/Blair/Dates/Date2/2/Love.jpg",
-"Images/Blair/Dates/Date2/2/Neutral.jpg",
-"Images/Blair/Dates/Date2/3/Base.jpg",
-"Images/Blair/Dates/Date2/3/Hate.jpg",
-"Images/Blair/Dates/Date2/3/Love.jpg",
-"Images/Blair/Dates/Date2/3/Neutral.jpg",
-"Images/Blair/Dates/Date2/4/Base.jpg",
-"Images/Blair/Dates/Date2/4/Hate.jpg",
-"Images/Blair/Dates/Date2/4/Love.jpg",
-"Images/Blair/Dates/Date2/4/Neutral.jpg",
-"Images/Blair/Dates/Date2/5/Base.jpg",
-"Images/Blair/Dates/Date2/5/Hate.jpg",
-"Images/Blair/Dates/Date2/5/Love.jpg",
-"Images/Blair/Dates/Date2/5/Neutral.jpg",
-"Images/Blair/Dates/Date3/3/Base.jpg",
-"Images/Blair/Dates/Date3/3/Closing.jpg",
-"Images/Blair/Dates/Date3/3/Hate.jpg",
-"Images/Blair/Dates/Date3/3/Love.jpg",
-"Images/Blair/Dates/Date3/3/Neutral.jpg",
-"Images/Blair/Dates/Date3/4/Base.jpg",
-"Images/Blair/Dates/Date3/4/Hate.jpg",
-"Images/Blair/Dates/Date3/4/Love.jpg",
-"Images/Blair/Dates/Date3/4/Neutral.jpg",
-"Images/Blair/Dates/Date3/5/Base.jpg",
-"Images/Blair/Dates/Date3/5/Hate.jpg",
-"Images/Blair/Dates/Date3/5/Love.jpg",
-"Images/Blair/Dates/Date3/5/Neutral.jpg",
-"Images/Blair/Dates/Date4/3/Base.jpg",
-"Images/Blair/Dates/Date4/3/Hate.jpg",
-"Images/Blair/Dates/Date4/3/Love.jpg",
-"Images/Blair/Dates/Date4/3/Neutral.jpg",
-"Images/Blair/Dates/Date4/4/Base.jpg",
-"Images/Blair/Dates/Date4/4/Hate.jpg",
-"Images/Blair/Dates/Date4/4/Love.jpg",
-"Images/Blair/Dates/Date4/4/Neutral.jpg",
-"Images/Blair/Dates/Date4/5/Base.jpg",
-"Images/Blair/Dates/Date4/5/Hate.jpg",
-"Images/Blair/Dates/Date4/5/Love.jpg",
-"Images/Blair/Dates/Date4/5/Neutral.jpg",
-"Images/Blair/Dates/Date5/4/Base.jpg",
-"Images/Blair/Dates/Date5/4/Hate.jpg",
-"Images/Blair/Dates/Date5/4/Love.jpg",
-"Images/Blair/Dates/Date5/4/Neutral.jpg",
-"Images/Blair/Dates/Date5/5/Base.jpg",
-"Images/Blair/Dates/Date5/5/Hate.jpg",
-"Images/Blair/Dates/Date5/5/Love.jpg",
-"Images/Blair/Dates/Date5/5/Neutral.jpg",
-"Images/Blair/GrowthEvent/1/Panel1.jpg",
-"Images/Blair/GrowthEvent/1/Panel2.jpg",
-"Images/Blair/GrowthEvent/1/Panel3.jpg",
-"Images/Blair/GrowthEvent/1/Panel4.jpg",
-"Images/Blair/GrowthEvent/1/Panel5.jpg",
-"Images/Blair/GrowthEvent/1/Panel6.jpg",
-"Images/Blair/GrowthEvent/2/Panel1.jpg",
-"Images/Blair/GrowthEvent/2/Panel10.jpg",
-"Images/Blair/GrowthEvent/2/Panel11.jpg",
-"Images/Blair/GrowthEvent/2/Panel12.jpg",
-"Images/Blair/GrowthEvent/2/Panel13.jpg",
-"Images/Blair/GrowthEvent/2/Panel14.jpg",
-"Images/Blair/GrowthEvent/2/Panel15.jpg",
-"Images/Blair/GrowthEvent/2/Panel2.jpg",
-"Images/Blair/GrowthEvent/2/Panel3.jpg",
-"Images/Blair/GrowthEvent/2/Panel4.jpg",
-"Images/Blair/GrowthEvent/2/Panel5.jpg",
-"Images/Blair/GrowthEvent/2/Panel6.jpg",
-"Images/Blair/GrowthEvent/2/Panel7.jpg",
-"Images/Blair/GrowthEvent/2/Panel8.jpg",
-"Images/Blair/GrowthEvent/2/Panel9.jpg",
-"Images/Blair/GrowthEvent/3/Still1.jpg",
-"Images/Blair/GrowthEvent/4/Panel1.jpg",
-"Images/Blair/GrowthEvent/4/Panel2.jpg",
-"Images/Blair/GrowthEvent/4/Panel3.jpg",
-"Images/Blair/GrowthEvent/4/Panel4.jpg",
-"Images/Blair/GrowthEvent/4/Panel5.jpg",
-"Images/Blair/GrowthEvent/4/Panel6.jpg",
-"Images/Blair/GrowthEvent/4/Panel7.jpg",
-"Images/Blair/GrowthEvent/4/Panel8.jpg",
-"Images/Blair/GrowthEvent/5/Still1.jpg",
-"Images/Blair/GrowthEvent/6/Panel1.jpg",
-"Images/Blair/GrowthEvent/6/Panel10.jpg",
-"Images/Blair/GrowthEvent/6/Panel11.jpg",
-"Images/Blair/GrowthEvent/6/Panel12.jpg",
-"Images/Blair/GrowthEvent/6/Panel13.jpg",
-"Images/Blair/GrowthEvent/6/Panel2.jpg",
-"Images/Blair/GrowthEvent/6/Panel3.jpg",
-"Images/Blair/GrowthEvent/6/Panel4.jpg",
-"Images/Blair/GrowthEvent/6/Panel5.jpg",
-"Images/Blair/GrowthEvent/6/Panel6.jpg",
-"Images/Blair/GrowthEvent/6/Panel7.jpg",
-"Images/Blair/GrowthEvent/6/Panel8.jpg",
-"Images/Blair/GrowthEvent/6/Panel9.jpg",
-"Images/Blair/GrowthEvent/7/Still1.jpg",
-"Images/Blair/GrowthEvent/8/Panel1.jpg",
-"Images/Blair/GrowthEvent/8/Panel10.jpg",
-"Images/Blair/GrowthEvent/8/Panel11.jpg",
-"Images/Blair/GrowthEvent/8/Panel12.jpg",
-"Images/Blair/GrowthEvent/8/Panel13.jpg",
-"Images/Blair/GrowthEvent/8/Panel14.jpg",
-"Images/Blair/GrowthEvent/8/Panel15.jpg",
-"Images/Blair/GrowthEvent/8/Panel2.jpg",
-"Images/Blair/GrowthEvent/8/Panel3.jpg",
-"Images/Blair/GrowthEvent/8/Panel4.jpg",
-"Images/Blair/GrowthEvent/8/Panel5.jpg",
-"Images/Blair/GrowthEvent/8/Panel6.jpg",
-"Images/Blair/GrowthEvent/8/Panel7.jpg",
-"Images/Blair/GrowthEvent/8/Panel8.jpg",
-"Images/Blair/GrowthEvent/8/Panel9.jpg",
-"Images/Blair/S/S1.jpg",
-"Images/Blair/S/S2.jpg",
-"Images/Blair/S/S3.jpg",
-"Images/Blair/S/S4.jpg",
-"Images/Blair/S/S5.jpg",
-"Images/Henriette/DateBackgrounds/Date1.jpg",
-"Images/Henriette/DateBackgrounds/Date2.jpg",
-"Images/Henriette/DateBackgrounds/Date3.jpg",
-"Images/Henriette/DateBackgrounds/Date4.jpg",
-"Images/Henriette/DateBackgrounds/Date5.jpg",
-"Images/Henriette/GrowthEvent/1/Panel1.jpg",
-"Images/Henriette/GrowthEvent/1/Panel2.jpg",
-"Images/Henriette/GrowthEvent/1/Panel3.jpg",
-"Images/Henriette/GrowthEvent/1/Panel4.jpg",
-"Images/Henriette/GrowthEvent/1/Panel5.jpg",
-"Images/Henriette/S/S1.jpg",
-"Images/Henriette/S/S2.jpg",
-"Images/Henriette/S/S3.jpg",
-"Images/Henriette/S/S4.jpg",
-"Images/Henriette/S/S5.jpg",
-"Images/Jennifer/AffectionEvent/1/Panel1.jpg",
-"Images/Jennifer/AffectionEvent/1/Panel2.jpg",
-"Images/Jennifer/AffectionEvent/1/Panel3.jpg",
-"Images/Jennifer/AffectionEvent/1/Panel4.jpg",
-"Images/Jennifer/AffectionEvent/1/Panel5.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel1.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel10.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel11.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel12.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel2.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel3.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel4.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel5.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel6.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel7.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel8.jpg",
-"Images/Jennifer/AffectionEvent/2/Panel9.jpg",
-"Images/Jennifer/DateBackgrounds/Date1.jpg",
-"Images/Jennifer/DateBackgrounds/Date2.jpg",
-"Images/Jennifer/DateBackgrounds/Date3.jpg",
-"Images/Jennifer/DateBackgrounds/Date4.jpg",
-"Images/Jennifer/DateBackgrounds/Date5.jpg",
-"Images/Jennifer/GrowthEvent/1/Panel1.jpg",
-"Images/Jennifer/GrowthEvent/1/Panel10.jpg",
-"Images/Jennifer/GrowthEvent/1/Panel2.jpg",
-"Images/Jennifer/GrowthEvent/1/Panel3.jpg",
-"Images/Jennifer/GrowthEvent/1/Panel4.jpg",
-"Images/Jennifer/GrowthEvent/1/Panel5.jpg",
-"Images/Jennifer/GrowthEvent/1/Panel6.jpg",
-"Images/Jennifer/GrowthEvent/1/Panel7.jpg",
-"Images/Jennifer/GrowthEvent/1/Panel8.jpg",
-"Images/Jennifer/GrowthEvent/1/Panel9.jpg",
-"Images/Jennifer/GrowthEvent/2/Panel1.jpg",
-"Images/Jennifer/GrowthEvent/2/Panel2.jpg",
-"Images/Jennifer/GrowthEvent/2/Panel3.jpg",
-"Images/Jennifer/GrowthEvent/2/Panel4.jpg",
-"Images/Jennifer/GrowthEvent/2/Panel5.jpg",
-"Images/Jennifer/GrowthEvent/2/Panel6.jpg",
-"Images/Jennifer/GrowthEvent/2/Panel7.jpg",
-"Images/Jennifer/GrowthEvent/2/Panel8.jpg",
-"Images/Jennifer/GrowthEvent/2/Panel9.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel1.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel10.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel11.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel2.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel3.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel4.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel5.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel6.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel7.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel8.jpg",
-"Images/Jennifer/GrowthEvent/4/Panel9.jpg",
-"Images/Jennifer/S/S1.jpg",
-"Images/Jennifer/S/S2.jpg",
-"Images/Jennifer/S/S3.jpg",
-"Images/Jennifer/S/S4.jpg",
-"Images/Jennifer/S/S5.jpg",
-"Images/TemplateGirl/DateBackgrounds/Date1.jpg",
-"Images/TemplateGirl/DateBackgrounds/Date2.jpg",
-"Images/TemplateGirl/DateBackgrounds/Date3.jpg",
-"Images/TemplateGirl/DateBackgrounds/Date4.jpg",
-"Images/TemplateGirl/DateBackgrounds/Date5.jpg",
-"Images/TemplateGirl/S/S1.jpg",
-"Images/TemplateGirl/S/S2.jpg",
-"Images/TemplateGirl/S/S3.jpg",
-"Images/TemplateGirl/S/S4.jpg",
-"Images/TemplateGirl/S/S5.jpg"]
-var allVids = ["Animations/Blair/1/Base.mp4",
-"Animations/Blair/1/Hate.mp4",
-"Animations/Blair/1/Love.mp4",
-"Animations/Blair/1/Neutral.mp4",
-"Animations/Blair/2/Base.mp4",
-"Animations/Blair/2/Hate.mp4",
-"Animations/Blair/2/Love.mp4",
-"Animations/Blair/2/Neutral.mp4",
-"Animations/Blair/3/Base.mp4",
-"Animations/Blair/3/Hate.mp4",
-"Animations/Blair/3/Love.mp4",
-"Animations/Blair/3/Neutral.mp4",
-"Animations/Blair/4/Base.mp4",
-"Animations/Blair/4/Hate.mp4",
-"Animations/Blair/4/Love.mp4",
-"Animations/Blair/4/Neutral.mp4",
-"Animations/Blair/5/Base.mp4",
-"Animations/Blair/5/Hate.mp4",
-"Animations/Blair/5/Love.mp4",
-"Animations/Blair/5/Neutral.mp4",
-"Animations/Blair/6/Base.mp4",
-"Animations/Blair/6/Hate.mp4",
-"Animations/Blair/6/Love.mp4",
-"Animations/Blair/6/Neutral.mp4",
-"Animations/Blair/7/Base.mp4",
-"Animations/Blair/7/Hate.mp4",
-"Animations/Blair/7/Love.mp4",
-"Animations/Blair/7/Neutral.mp4",
-"Animations/Blair/8/Base.mp4",
-"Animations/Blair/8/Hate.mp4",
-"Animations/Blair/8/Love.mp4",
-"Animations/Blair/8/Neutral.mp4",
-"Animations/Blair/S/S1/0.mp4",
-"Animations/Blair/S/S2/0.mp4",
-"Animations/Blair/S/S2/1.mp4",
-"Animations/Blair/S/S2/2.mp4",
-"Animations/Blair/S/S2/3.mp4",
-"Animations/Blair/S/S3/0.mp4",
-"Animations/Blair/S/S4/0.mp4",
-"Animations/Blair/S/S4/1.mp4",
-"Animations/Blair/S/S4/2.mp4",
-"Animations/Blair/S/S5/0.mp4",
-"Animations/Blair/S/S5/1.mp4",
-"Animations/Blair/S/S5/2.mp4",
-"Animations/Henriette/1/Base.mp4",
-"Animations/Henriette/1/Hate.mp4",
-"Animations/Henriette/1/Love.mp4",
-"Animations/Henriette/1/Neutral.mp4",
-"Animations/Henriette/2/Base.mp4",
-"Animations/Henriette/2/Hate.mp4",
-"Animations/Henriette/2/Love.mp4",
-"Animations/Henriette/2/Neutral.mp4",
-"Animations/Henriette/3/Base.mp4",
-"Animations/Henriette/3/Hate.mp4",
-"Animations/Henriette/3/Love.mp4",
-"Animations/Henriette/3/Neutral.mp4",
-"Animations/Henriette/4/Base.mp4",
-"Animations/Henriette/4/Hate.mp4",
-"Animations/Henriette/4/Love.mp4",
-"Animations/Henriette/4/Neutral.mp4",
-"Animations/Henriette/5/Base.mp4",
-"Animations/Henriette/5/Hate.mp4",
-"Animations/Henriette/5/Love.mp4",
-"Animations/Henriette/5/Neutral.mp4",
-"Animations/Henriette/6/Base.mp4",
-"Animations/Henriette/6/Hate.mp4",
-"Animations/Henriette/6/Love.mp4",
-"Animations/Henriette/6/Neutral.mp4",
-"Animations/Henriette/7/Base.mp4",
-"Animations/Henriette/7/Hate.mp4",
-"Animations/Henriette/7/Love.mp4",
-"Animations/Henriette/7/Neutral.mp4",
-"Animations/Henriette/8/Base.mp4",
-"Animations/Henriette/8/Hate.mp4",
-"Animations/Henriette/8/Love.mp4",
-"Animations/Henriette/8/Neutral.mp4",
-"Animations/Jennifer/1/Base.mp4",
-"Animations/Jennifer/1/Hate.mp4",
-"Animations/Jennifer/1/Love.mp4",
-"Animations/Jennifer/1/Neutral.mp4",
-"Animations/Jennifer/2/Base.mp4",
-"Animations/Jennifer/2/Hate.mp4",
-"Animations/Jennifer/2/Love.mp4",
-"Animations/Jennifer/2/Neutral.mp4",
-"Animations/Jennifer/3/Base.mp4",
-"Animations/Jennifer/3/Hate.mp4",
-"Animations/Jennifer/3/Love.mp4",
-"Animations/Jennifer/3/Neutral.mp4",
-"Animations/Jennifer/4/Base.mp4",
-"Animations/Jennifer/4/Hate.mp4",
-"Animations/Jennifer/4/Love.mp4",
-"Animations/Jennifer/4/Neutral.mp4",
-"Animations/Jennifer/5/Base.mp4",
-"Animations/Jennifer/5/Hate.mp4",
-"Animations/Jennifer/5/Love.mp4",
-"Animations/Jennifer/5/Neutral.mp4",
-"Animations/Jennifer/6/Base.mp4",
-"Animations/Jennifer/6/Hate.mp4",
-"Animations/Jennifer/6/Love.mp4",
-"Animations/Jennifer/6/Neutral.mp4",
-"Animations/Jennifer/7/Base.mp4",
-"Animations/Jennifer/7/Hate.mp4",
-"Animations/Jennifer/7/Love.mp4",
-"Animations/Jennifer/7/Neutral.mp4",
-"Animations/Jennifer/8/Base.mp4",
-"Animations/Jennifer/8/Hate.mp4",
-"Animations/Jennifer/8/Love.mp4",
-"Animations/Jennifer/8/Neutral.mp4",]
-
 window.onload = function() {
+
   //window.localStorage.clear();
 
   // set counter if not set up before, otherwise set element to current count
@@ -857,7 +444,6 @@ function loadGirl(g) {
 }
 
 function startGameFunction() {
-  //
   const audio = document.getElementById("background-music");
   audio.volume = 0.2;
   // audio.play();
@@ -2372,10 +1958,10 @@ function closeCGMenu() {
 }
 
 //-------------------------------------events------------------------------------------
-// imageContainer
-var imageContainer = 'eventImage';
-
+var metaTriggerGrowthFlash = false;
 function startEvent(type, manualStage = -1) {
+
+  metaTriggerGrowthFlash = false;
 
   // lock dialogue triggers
   dialoguesAllowed = false;
@@ -2415,7 +2001,7 @@ function startEvent(type, manualStage = -1) {
   var currentPanelText = currentGirlEventDict[currentPanel]
 
   // set first event image
-  document.getElementById(imageContainer).setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
+  document.getElementById('eventImage').setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
 
   // set event text
   document.getElementById('withinEventText').innerHTML = currentPanelText;
@@ -2425,7 +2011,8 @@ function startEvent(type, manualStage = -1) {
 
   // if a Still image (like an inbetween), hide the overlay for this panel. else show.
   if(currentPanel.includes("Skip")){
-    EventClose(true);
+    metaTriggerGrowthFlash = true;
+    EventClose();
     return;
   }
   else if(currentPanel.includes("Still")){
@@ -2435,12 +2022,8 @@ function startEvent(type, manualStage = -1) {
     document.getElementById('withinEventOverlayContainer').style.display = "flex";
   }
 
-  // check if next panel and update buttons
-  CheckAndUpdateEventButtons();
-
-  // get Metadata about whether this events been done before.
   var alreadyCompleted = girlDictionary[currentGirl]["Metadata"]["CompletedEvents"].includes(eventType+"_"+eventTypeStage.toString());
-  if(!alreadyCompleted){
+  if (!alreadyCompleted){
     // make note that this event has been done before.
     girlDictionary[currentGirl]["Metadata"]["CompletedEvents"].push(eventType+"_"+eventTypeStage.toString());
     globalSaveData[currentGirl] = girlDictionary[currentGirl]["Metadata"];
@@ -2448,7 +2031,13 @@ function startEvent(type, manualStage = -1) {
 
     // add to memory log
     addEventToMemoryLog(eventType, eventTypeStage);
+
+    // trigger growth flash upon finish
+    metaTriggerGrowthFlash = true;
   }
+
+  // check if next panel and update buttons
+  CheckAndUpdateEventButtons();
 }
 
 function EventNextPanel() {
@@ -2462,7 +2051,7 @@ function EventNextPanel() {
   var currentPanelText = currentGirlEventDict[currentPanel]
 
   // set event image
-  document.getElementById(imageContainer).setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
+  document.getElementById('eventImage').setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
 
   // if a Still image (like an inbetween), hide the overlay for this panel. else show.
   if(currentPanel.includes("Still")){
@@ -2490,7 +2079,7 @@ function EventPrevPanel() {
   var currentPanelText = currentGirlEventDict[currentPanel]
 
   // set event image
-  document.getElementById(imageContainer).setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
+  document.getElementById('eventImage').setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
 
   // if a Still image (like an inbetween), hide the overlay for this panel. else show.
   if(currentPanel.includes("Still")){
@@ -2509,7 +2098,7 @@ function EventPrevPanel() {
 
 function EventClose() {
   // timeout to clear the event image
-  document.getElementById(imageContainer).setAttribute('src', "");
+  document.getElementById('eventImage').setAttribute('src', "");
 
   // ensure you can't double click the finish button
   document.getElementById('eventFinishButton').disabled = true;
@@ -2520,18 +2109,10 @@ function EventClose() {
   // ensure girl menu is closed
   closeGirlMenu();
 
-  // get Metadata about whether this events been done before.
-  var alreadyCompleted = girlDictionary[currentGirl]["Metadata"]["CompletedEvents"].includes(eventType+"_"+eventTypeStage.toString());
-  if(alreadyCompleted){
-    // activate dialogue triggers
-    dialoguesAllowed = true;
-    return;
-  }
-
   // enable dialogues
   dialoguesAllowed = true;
 
-  if(eventType == "GrowthEvent" && currentStage > 1){
+  if(eventType == "GrowthEvent" && currentStage > 1 && metaTriggerGrowthFlash){
     // special case where we want to disable dialogues before the flash
     dialoguesAllowed = false;
 
