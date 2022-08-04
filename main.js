@@ -486,7 +486,6 @@ var allVids = ["Animations/Blair/1/Base.mp4",
 "Animations/Jennifer/8/Neutral.mp4",]
 
 window.onload = function() {
-
   //window.localStorage.clear();
 
   // set counter if not set up before, otherwise set element to current count
@@ -619,6 +618,8 @@ window.onload = function() {
 
   // run random dialogues. won't really start until dialoguesAllowed lock is released.
   setTimeout(triggerRandomDialogue, Math.random() * 30000 + 20000) //
+
+  document.getElementById('LoadingScreenOverlay').classList.add('invisible');
 }
 
 function achievementLoading() {

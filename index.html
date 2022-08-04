@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<div id="LoadingScreenOverlay" class="invisible overlayPreload">
+<div id="LoadingScreenOverlay" class="overlayPreload">
   <div class="startGame" style="margin-bottom:10px">
     <span style="font-size: 100px;">Loading...</span>
     <span id="currentPreloadingImage" style="font-size: 25px;"></span>
@@ -1192,10 +1192,8 @@
         console.log("Videos Preloaded: " + vids.length + " / " + vidPaths.length)
 			}
 
-      document.getElementById('LoadingScreenOverlay').classList.remove('invisible');
 			preloadImages();
   		preloadVids();
-      document.getElementById('LoadingScreenOverlay').classList.add('invisible');
 		//--><!]]>
 	</script>
 </div>

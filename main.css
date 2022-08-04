@@ -63,7 +63,7 @@
   bottom: 0;
   transition: 0.3s;
   background-color: #fcd9c2;
-  z-index: 4; /* Specify a stack order in case you're using a different order for other elements */
+  z-index: 6; /* Specify a stack order in case you're using a different order for other elements */
 }
 
 #mainUIId{
