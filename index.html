@@ -9,6 +9,7 @@
 
 <audio id="background-music" loop="true" src="Sounds/1_MainMusic.mp3"></audio>
 
+
 <div class="WholeGameContainer">
 
 <div id="overlay" class="overlay">
@@ -26,6 +27,16 @@
     </div>
     <br>
     <button disabled id="startGameButton" class="startGameButton disabledButton" type="submit" onclick="startGameFunction()">Start Game ></button>
+  </div>
+</div>
+
+<div id="LoadingScreenOverlay" class="invisible overlayPreload">
+  <div class="startGame" style="margin-bottom:10px">
+    <span style="font-size: 100px;">Loading...</span>
+    <span id="currentPreloadingImage" style="font-size: 25px;"></span>
+  </div>
+  <div class="progress" id="myProgress">
+    <div id="preloadLoadingBar"></div>
   </div>
 </div>
 
@@ -737,11 +748,9 @@
       Description
     </div>
   </div>
+  <!--<img width="5px;" style="margin-left: 5px;" id="imagePreloader" src=""></img> -->
 </div>
 </div>
-
-
-
 
 </body>
 </html>

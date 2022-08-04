@@ -52,6 +52,20 @@
   z-index: 5; /* Specify a stack order in case you're using a different order for other elements */
 }
 
+.overlayPreload {
+  position: absolute;; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.3s;
+  background-color: #fcd9c2;
+  z-index: 5; /* Specify a stack order in case you're using a different order for other elements */
+}
+
 #mainUIId{
   transition: 0.5s;
 }
@@ -272,6 +286,10 @@
 
 .ClickVideoZoomed {
   transform: scale(1.05);
+}
+
+.preloaderClass{
+  z-index: -1000;
 }
 
 .WholeGameContainer{
@@ -1652,6 +1670,17 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.progress {
+  width: 100%;
+  background-color: grey;
+}
+
+#preloadLoadingBar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
 }
 
 #Blair{
