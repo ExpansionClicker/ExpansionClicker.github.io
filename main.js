@@ -871,6 +871,7 @@ function preloadImages() {         //  create a loop function
       preloadIndex = 0;
       preloadAnimations();
     }
+    img.remove();
   }, 5)
 }
 
@@ -888,14 +889,14 @@ function preloadAnimations() {       //  create a loop function
       preloadIndex = 0;
       document.getElementById('LoadingScreenOverlay').classList.add('invisible');
     }
-    //vid.remove();
+    vid.remove();
   }, 5)
 }
 
 function startGameFunction() {
   // preload images
-  document.getElementById('LoadingScreenOverlay').classList.remove('invisible');
-  preloadImages();
+  //document.getElementById('LoadingScreenOverlay').classList.remove('invisible');
+  //preloadImages();
 
   const audio = document.getElementById("background-music");
   audio.volume = 0.2;
