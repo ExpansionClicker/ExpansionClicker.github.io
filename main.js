@@ -376,7 +376,114 @@ var allImages = ["Images/MissingCG.jpg",
 "Images/TemplateGirl/S/S3.jpg",
 "Images/TemplateGirl/S/S4.jpg",
 "Images/TemplateGirl/S/S5.jpg"]
-
+var allVids = ["Animations/Blair/1/Base.mp4",
+"Animations/Blair/1/Hate.mp4",
+"Animations/Blair/1/Love.mp4",
+"Animations/Blair/1/Neutral.mp4",
+"Animations/Blair/2/Base.mp4",
+"Animations/Blair/2/Hate.mp4",
+"Animations/Blair/2/Love.mp4",
+"Animations/Blair/2/Neutral.mp4",
+"Animations/Blair/3/Base.mp4",
+"Animations/Blair/3/Hate.mp4",
+"Animations/Blair/3/Love.mp4",
+"Animations/Blair/3/Neutral.mp4",
+"Animations/Blair/4/Base.mp4",
+"Animations/Blair/4/Hate.mp4",
+"Animations/Blair/4/Love.mp4",
+"Animations/Blair/4/Neutral.mp4",
+"Animations/Blair/5/Base.mp4",
+"Animations/Blair/5/Hate.mp4",
+"Animations/Blair/5/Love.mp4",
+"Animations/Blair/5/Neutral.mp4",
+"Animations/Blair/6/Base.mp4",
+"Animations/Blair/6/Hate.mp4",
+"Animations/Blair/6/Love.mp4",
+"Animations/Blair/6/Neutral.mp4",
+"Animations/Blair/7/Base.mp4",
+"Animations/Blair/7/Hate.mp4",
+"Animations/Blair/7/Love.mp4",
+"Animations/Blair/7/Neutral.mp4",
+"Animations/Blair/8/Base.mp4",
+"Animations/Blair/8/Hate.mp4",
+"Animations/Blair/8/Love.mp4",
+"Animations/Blair/8/Neutral.mp4",
+"Animations/Blair/S/S1/0.mp4",
+"Animations/Blair/S/S2/0.mp4",
+"Animations/Blair/S/S2/1.mp4",
+"Animations/Blair/S/S2/2.mp4",
+"Animations/Blair/S/S2/3.mp4",
+"Animations/Blair/S/S3/0.mp4",
+"Animations/Blair/S/S4/0.mp4",
+"Animations/Blair/S/S4/1.mp4",
+"Animations/Blair/S/S4/2.mp4",
+"Animations/Blair/S/S5/0.mp4",
+"Animations/Blair/S/S5/1.mp4",
+"Animations/Blair/S/S5/2.mp4",
+"Animations/Henriette/1/Base.mp4",
+"Animations/Henriette/1/Hate.mp4",
+"Animations/Henriette/1/Love.mp4",
+"Animations/Henriette/1/Neutral.mp4",
+"Animations/Henriette/2/Base.mp4",
+"Animations/Henriette/2/Hate.mp4",
+"Animations/Henriette/2/Love.mp4",
+"Animations/Henriette/2/Neutral.mp4",
+"Animations/Henriette/3/Base.mp4",
+"Animations/Henriette/3/Hate.mp4",
+"Animations/Henriette/3/Love.mp4",
+"Animations/Henriette/3/Neutral.mp4",
+"Animations/Henriette/4/Base.mp4",
+"Animations/Henriette/4/Hate.mp4",
+"Animations/Henriette/4/Love.mp4",
+"Animations/Henriette/4/Neutral.mp4",
+"Animations/Henriette/5/Base.mp4",
+"Animations/Henriette/5/Hate.mp4",
+"Animations/Henriette/5/Love.mp4",
+"Animations/Henriette/5/Neutral.mp4",
+"Animations/Henriette/6/Base.mp4",
+"Animations/Henriette/6/Hate.mp4",
+"Animations/Henriette/6/Love.mp4",
+"Animations/Henriette/6/Neutral.mp4",
+"Animations/Henriette/7/Base.mp4",
+"Animations/Henriette/7/Hate.mp4",
+"Animations/Henriette/7/Love.mp4",
+"Animations/Henriette/7/Neutral.mp4",
+"Animations/Henriette/8/Base.mp4",
+"Animations/Henriette/8/Hate.mp4",
+"Animations/Henriette/8/Love.mp4",
+"Animations/Henriette/8/Neutral.mp4",
+"Animations/Jennifer/1/Base.mp4",
+"Animations/Jennifer/1/Hate.mp4",
+"Animations/Jennifer/1/Love.mp4",
+"Animations/Jennifer/1/Neutral.mp4",
+"Animations/Jennifer/2/Base.mp4",
+"Animations/Jennifer/2/Hate.mp4",
+"Animations/Jennifer/2/Love.mp4",
+"Animations/Jennifer/2/Neutral.mp4",
+"Animations/Jennifer/3/Base.mp4",
+"Animations/Jennifer/3/Hate.mp4",
+"Animations/Jennifer/3/Love.mp4",
+"Animations/Jennifer/3/Neutral.mp4",
+"Animations/Jennifer/4/Base.mp4",
+"Animations/Jennifer/4/Hate.mp4",
+"Animations/Jennifer/4/Love.mp4",
+"Animations/Jennifer/4/Neutral.mp4",
+"Animations/Jennifer/5/Base.mp4",
+"Animations/Jennifer/5/Hate.mp4",
+"Animations/Jennifer/5/Love.mp4",
+"Animations/Jennifer/5/Neutral.mp4",
+"Animations/Jennifer/6/Base.mp4",
+"Animations/Jennifer/6/Hate.mp4",
+"Animations/Jennifer/6/Love.mp4",
+"Animations/Jennifer/6/Neutral.mp4",
+"Animations/Jennifer/7/Base.mp4",
+"Animations/Jennifer/7/Hate.mp4",
+"Animations/Jennifer/7/Love.mp4",
+"Animations/Jennifer/7/Neutral.mp4",
+"Animations/Jennifer/8/Base.mp4",
+"Animations/Jennifer/8/Hate.mp4",
+"Animations/Jennifer/8/Love.mp4",
+"Animations/Jennifer/8/Neutral.mp4",]
 
 window.onload = function() {
 
@@ -751,19 +858,38 @@ function loadGirl(g) {
 var preloadIndex = 0;                  //  set your counter to 1
 
 function preloadImages() {         //  create a loop function
-  setTimeout(function() {   //  call a 3s setTimeout when the loop is called
+  setTimeout(function() {
     var img=new Image();
     img.src=allImages[preloadIndex];
-    document.getElementById("preloadLoadingBar").style.width = (100*(preloadIndex/allImages.length)+1) + "%";
+    document.getElementById("preloadLoadingBar").style.width = (100*(preloadIndex/(allVids.length + allImages.length))+1) + "%";
     currentPreloadingImage.innerHTML = allImages[preloadIndex];
     preloadIndex++;                    //  increment the counter
     if (preloadIndex < allImages.length) {           //  if the counter < 10, call the loop function
       preloadImages();             //  ..  again which will trigger another
     }
     else{
+      preloadIndex = 0;
+      preloadAnimations();
+    }
+  }, 5)
+}
+
+function preloadAnimations() {       //  create a loop function
+  setTimeout(function() {
+    var vid=document.createElement('video');
+    vid.src=allVids[preloadIndex];
+    document.getElementById("preloadLoadingBar").style.width = (100*((preloadIndex+allImages.length)/(allVids.length + allImages.length))+1) + "%";
+    currentPreloadingImage.innerHTML = allVids[preloadIndex];
+    preloadIndex++;                    //  increment the counter
+    if (preloadIndex < allVids.length) {           //  if the counter < 10, call the loop function
+      preloadAnimations();             //  ..  again which will trigger another
+    }
+    else{
+      preloadIndex = 0;
       document.getElementById('LoadingScreenOverlay').classList.add('invisible');
     }
-  }, 10)
+    //vid.remove();
+  }, 5)
 }
 
 function startGameFunction() {
