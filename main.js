@@ -2474,6 +2474,18 @@ function startEvent(type, manualStage = -1) {
 
   // check if next panel and update buttons
   CheckAndUpdateEventButtons();
+
+  // get Metadata about whether this events been done before.
+  var alreadyCompleted = girlDictionary[currentGirl]["Metadata"]["CompletedEvents"].includes(eventType+"_"+eventTypeStage.toString());
+  if(!alreadyCompleted){
+    // make note that this event has been done before.
+    girlDictionary[currentGirl]["Metadata"]["CompletedEvents"].push(eventType+"_"+eventTypeStage.toString());
+    globalSaveData[currentGirl] = girlDictionary[currentGirl]["Metadata"];
+    window.localStorage.setItem("GirlDictionary", JSON.stringify(globalSaveData));
+
+    // add to memory log
+    addEventToMemoryLog(eventType, eventTypeStage);
+  }
 }
 
 function EventNextPanel() {
@@ -2532,7 +2544,7 @@ function EventPrevPanel() {
   CheckAndUpdateEventButtons();
 }
 
-function EventClose(skipped = false) {
+function EventClose() {
   // timeout to clear the event image
   document.getElementById('eventImage').setAttribute('src', "");
 
@@ -2551,15 +2563,6 @@ function EventClose(skipped = false) {
     // activate dialogue triggers
     dialoguesAllowed = true;
     return;
-  }
-  else if (!skipped){
-    // make note that this event has been done before.
-    girlDictionary[currentGirl]["Metadata"]["CompletedEvents"].push(eventType+"_"+eventTypeStage.toString());
-    globalSaveData[currentGirl] = girlDictionary[currentGirl]["Metadata"];
-    window.localStorage.setItem("GirlDictionary", JSON.stringify(globalSaveData));
-
-    // add to memory log
-    addEventToMemoryLog(eventType, eventTypeStage);
   }
 
   // enable dialogues
