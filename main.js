@@ -2412,6 +2412,9 @@ function closeCGMenu() {
 }
 
 //-------------------------------------events------------------------------------------
+// imageContainer
+var imageContainer = 'eventImage';
+
 function startEvent(type, manualStage = -1) {
 
   // lock dialogue triggers
@@ -2452,7 +2455,7 @@ function startEvent(type, manualStage = -1) {
   var currentPanelText = currentGirlEventDict[currentPanel]
 
   // set first event image
-  document.getElementById('eventImage').setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
+  document.getElementById(imageContainer).setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
 
   // set event text
   document.getElementById('withinEventText').innerHTML = currentPanelText;
@@ -2499,7 +2502,7 @@ function EventNextPanel() {
   var currentPanelText = currentGirlEventDict[currentPanel]
 
   // set event image
-  document.getElementById('eventImage').setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
+  document.getElementById(imageContainer).setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
 
   // if a Still image (like an inbetween), hide the overlay for this panel. else show.
   if(currentPanel.includes("Still")){
@@ -2527,7 +2530,7 @@ function EventPrevPanel() {
   var currentPanelText = currentGirlEventDict[currentPanel]
 
   // set event image
-  document.getElementById('eventImage').setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
+  document.getElementById(imageContainer).setAttribute('src', "Images/"+currentGirl+"/"+eventType+"/"+eventTypeStage+"/"+currentPanel+".jpg");
 
   // if a Still image (like an inbetween), hide the overlay for this panel. else show.
   if(currentPanel.includes("Still")){
@@ -2546,7 +2549,7 @@ function EventPrevPanel() {
 
 function EventClose() {
   // timeout to clear the event image
-  document.getElementById('eventImage').setAttribute('src', "");
+  document.getElementById(imageContainer).setAttribute('src', "");
 
   // ensure you can't double click the finish button
   document.getElementById('eventFinishButton').disabled = true;
